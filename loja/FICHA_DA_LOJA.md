@@ -2,7 +2,7 @@
 
 **Nome:** Pesquisa MirandasTech
 **Resumo (≤132):** Método científico no navegador: referências conferidas no Crossref, diário de busca, triagem, extração e registro de uso de IA. Tudo local.
-**Categoria:** Produtividade → Ferramentas de desenvolvedor? Não: **Educação**
+**Categoria:** Educação
 **Idioma:** Português (Brasil)
 
 ## Descrição

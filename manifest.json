@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Pesquisa MirandasTech",
-  "version": "0.8.2",
-  "description": "Referências conferidas no Crossref, diário de busca PRISMA-S, triagem no navegador, registro de uso de IA e extração com âncora. Tudo local, nada sai do seu computador.",
+  "version": "0.8.3",
+  "description": "Método científico no navegador: referências no Crossref, diário de busca, triagem, extração e registro de uso de IA. Tudo local.",
   "permissions": [
     "activeTab",
     "scripting",
