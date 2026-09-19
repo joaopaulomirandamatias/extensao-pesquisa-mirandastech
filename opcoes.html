@@ -1,0 +1,30 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Opções · Pesquisa MirandasTech</title>
+<style>body{max-width:720px;margin:30px auto;font:14px/1.5 system-ui,sans-serif;color:#14202C;padding:0 16px}h1{font-size:20px}h2{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#7A8794;margin-top:26px}
+textarea,input{width:100%;box-sizing:border-box;padding:7px 9px;border:1px solid #D2DAE2;border-radius:4px;font:13px ui-monospace,monospace}textarea{min-height:150px}
+button{border:0;border-radius:4px;padding:7px 14px;background:#1B4F86;color:#fff;cursor:pointer;margin-top:8px}.muted{color:#7A8794;font-size:12.5px}</style></head><body>
+<h1>Pesquisa MirandasTech · opções</h1>
+<h2>Códigos de exclusão (triagem)</h2>
+<p class="muted">Um por linha, <code>CÓDIGO — descrição</code>. Devem ser os do seu codebook congelado; o padrão vem do modelo CODEBOOK.md do plugin.</p>
+<textarea id="cod"></textarea>
+<h2>Como abrir</h2>
+<p class="muted">Painel lateral: fica aberto ao lado da página enquanto você navega (recomendado). Popup: a janela flutuante que fecha ao clicar fora.</p>
+<label><input type="radio" name="modo" value="painel" style="width:auto"> Painel lateral</label> &nbsp; <label><input type="radio" name="modo" value="popup" style="width:auto"> Popup flutuante</label>
+<h2>Leitura automática das páginas</h2>
+<p class="muted">Sem esta permissão, a extensão só lê a aba em que você clicou no ícone. Com ela, o painel lateral lê cada página que você abre enquanto estiver aberto. Nada é enviado a lugar nenhum.</p>
+<button id="permitir" type="button">Permitir</button> <button id="retirar" type="button" style="background:#B3261E">Retirar</button> <span class="muted" id="permst"></span>
+<h2>Etiqueta padrão ao salvar no Zotero</h2><input id="etq">
+<h2>Quem registra (coluna «quem» do USO_DE_IA.csv)</h2><input id="quem" placeholder="nome ou iniciais">
+<br><button id="salvar">Salvar</button> <span class="muted" id="st"></span>
+<h2>Privacidade</h2><p class="muted">A extensão só lê a página quando você clica no ícone. Consulta a API pública do Crossref e, se aberto, o Zotero local (127.0.0.1:23119). Buscas, decisões, usos de IA e células ficam em <code>chrome.storage.local</code>, neste navegador. Nada é enviado a servidores da MirandasTech.</p>
+<script type="module">
+import { $, ler, gravar, CODIGOS_PADRAO } from "./lib.js";
+$("cod").value = (await ler("codigos", CODIGOS_PADRAO)).map(([c, d]) => `${c} — ${d}`).join("\n");
+$("etq").value = await ler("etiqueta", "conferido-crossref"); document.querySelector(`input[name=modo][value="${await ler("modo", "painel")}"]`).checked = true; $("quem").value = await ler("quem", "");
+const ORIG = { origins: ["http://*/*", "https://*/*"] };
+async function permst() { $("permst").textContent = (await chrome.permissions.contains(ORIG)) ? "ativa" : "não concedida"; }
+$("permitir").onclick = async () => { await chrome.permissions.request(ORIG); permst(); }; $("retirar").onclick = async () => { await chrome.permissions.remove(ORIG); permst(); }; permst();
+$("salvar").onclick = async () => {
+  const cods = $("cod").value.split("\n").map(l => l.trim()).filter(Boolean).map(l => { const m = l.match(/^(\S+)\s*[—\-–:]\s*(.+)$/); return m ? [m[1], m[2]] : [l, ""]; });
+  await gravar("codigos", cods); await gravar("modo", document.querySelector("input[name=modo]:checked").value); await gravar("etiqueta", $("etq").value.trim()); await gravar("quem", $("quem").value.trim()); $("st").textContent = "salvo ✔";
+};
+</script></body></html>

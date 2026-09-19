@@ -1,0 +1,328 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+:root{--navy:#0E2D52;--blue:#1B4F86;--cyan:#12A2CC;--paper:#F4F6F9;--ink:#14202C;--ink2:#4A5866;--ink3:#7A8794;--rule:#D2DAE2;--ok:#2E7D5B;--no:#B3261E;--gold:#8A5A00;--gold-soft:#FFF4D6}
+html,body{margin:0;height:100%}body{width:600px;height:600px;max-height:600px;display:flex;flex-direction:column;overflow:hidden;font:13px/1.4 system-ui,sans-serif;color:var(--ink);background:var(--paper)}
+body.aba{width:auto;max-width:860px;height:100vh;max-height:none;margin:0 auto}
+body.painel{width:auto;min-width:300px;height:100vh;max-height:none}
+body.painel nav{flex-wrap:wrap}body.painel nav button{flex:1 1 auto;min-width:64px}
+header{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--navy);color:#fff}
+header img{width:20px;height:20px;border-radius:4px}header b{font-size:14px}header span{margin-left:auto;font-size:11px;opacity:.75}
+nav{display:flex;background:#fff;border-bottom:1px solid var(--rule);overflow-x:auto}
+nav button{flex:1;border:0;background:none;padding:8px 6px;font-size:11.5px;color:var(--ink2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+nav button.on{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}
+main{flex:1;min-height:0;overflow-y:auto}section{display:none;padding:10px 14px}section.on{display:block}
+header,nav,footer{flex:none}
+h2{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:8px 0 5px}
+.box{background:#fff;border:1px solid var(--rule);border-radius:5px;padding:7px 9px;font-size:12.5px;white-space:pre-wrap;word-break:break-word;min-height:20px}
+button.b{border:0;border-radius:4px;padding:6px 10px;background:var(--blue);color:#fff;cursor:pointer;font-size:12px;margin:5px 4px 0 0}
+button.o{background:#fff;color:var(--blue);border:1px solid var(--blue)}button.r{background:var(--no)}button.g{background:var(--ok)}button.y{background:#C99A2E}
+button.s{padding:3px 7px;font-size:11px;margin:2px 2px 0 0}
+input,textarea,select{width:100%;box-sizing:border-box;margin:3px 0;padding:5px 7px;border:1px solid var(--rule);border-radius:4px;font:12.5px system-ui,sans-serif;background:#fff;color:var(--ink)}
+textarea{min-height:70px;resize:vertical}
+.ok{color:var(--ok)}.no{color:var(--no)}.muted{color:var(--ink3);font-size:11.5px}.warn{background:var(--gold-soft);color:var(--gold);border-radius:4px;padding:5px 8px;font-size:11.5px;margin:4px 0}
+table{border-collapse:collapse;width:100%;font-size:11.5px;background:#fff}th{text-align:left;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:4px 5px;border-bottom:1px solid var(--rule)}td{padding:4px 5px;border-bottom:1px solid #EEF1F4;vertical-align:top}
+.rec{background:#fff;border:1px solid var(--rule);border-radius:5px;padding:6px 8px;margin:5px 0}.rec .t{font-weight:600}.rec .m{font-size:11px;color:var(--ink3)}
+.rec .x{float:right;border:0;background:none;color:var(--ink3);cursor:pointer;font-size:13px;padding:0 4px}.rec .x:hover{color:var(--no)}.rec.oc{opacity:.55}
+.rec.inc{border-left:4px solid var(--ok)}.rec.exc{border-left:4px solid var(--no)}.rec.may{border-left:4px solid #C99A2E}
+.row{display:flex;gap:6px}.row>*{flex:1}
+.ajuda{margin:0 0 8px;border:1px solid #BFD9EA;background:#EAF5FB;border-radius:6px;font-size:12.5px}
+.ajuda summary{cursor:pointer;padding:6px 10px;font-weight:600;color:var(--blue);list-style:none;display:flex;gap:8px;align-items:center}
+.ajuda summary::before{content:"?";display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px}
+.ajuda div{padding:0 10px 8px;color:var(--ink2)}.ajuda b{color:var(--ink)}.ajuda p{margin:4px 0}
+.q{display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;background:#C9D3DD;color:#fff;font-size:10px;font-weight:700;cursor:help;vertical-align:middle;margin-left:3px}
+footer{padding:6px 12px;font-size:11px;color:var(--ink3);border-top:1px solid var(--rule);background:#fff}footer a{color:var(--blue);text-decoration:none}
+.mlist a{display:block;background:#fff;border:1px solid var(--rule);border-radius:5px;padding:6px 9px;margin:4px 0;text-decoration:none;color:var(--ink)}
+.mlist a:hover{border-color:var(--blue)}.mlist a b{display:block;font-size:12.5px;color:var(--blue)}.mlist a span{font-size:11.5px;color:var(--ink3)}
+.mlist a.mtop{background:var(--navy);border-color:var(--navy)}.mlist a.mtop b{color:#fff}.mlist a.mtop span{color:#BFD3E8}
+.card{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:8px 10px;margin:0 0 6px}.card p{margin:4px 0}
+code.cp{cursor:copy;background:#EEF2F6;border:1px solid var(--rule);border-radius:3px;padding:1px 5px;font-size:11.5px}code.cp:hover{border-color:var(--blue)}
+.fases td:nth-child(1){white-space:nowrap}
+.sobre-top{display:flex;gap:14px;align-items:center;background:var(--navy);color:#fff;border-radius:8px;padding:12px 14px;margin-bottom:8px}
+.sobre-top img{width:96px;height:96px;border-radius:12px;flex:none}.sobre-top h3{margin:0;font-size:20px}.sobre-top .lead{margin:0 0 6px;color:var(--cyan);font-weight:600;letter-spacing:.06em;font-size:12px}.sobre-top p{margin:0;font-size:12.5px;color:#DCE6F0}.sobre-top b{color:#fff}
+.links3{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:4px 0}.links3 a.b{text-decoration:none;display:inline-block}
+@keyframes pisca{0%,100%{box-shadow:0 0 0 0 rgba(27,79,134,.0)}50%{box-shadow:0 0 0 6px rgba(27,79,134,.45)}}.pisca{animation:pisca 1s ease-in-out 4}
+.bloco{margin:0 0 6px;border:1px solid var(--rule);border-radius:6px;background:#fff}
+.bloco>summary{cursor:pointer;padding:8px 10px;font-size:12.5px;font-weight:600;color:var(--navy);list-style:none;display:flex;align-items:center;gap:8px}
+.bloco>summary::before{content:"▸";color:var(--blue);font-size:12px;transition:transform .15s}.bloco[open]>summary::before{transform:rotate(90deg)}
+.bloco>summary:hover{background:#F4F7FA}.bloco>.card{border:0;border-top:1px solid var(--rule);border-radius:0;margin:0}
+.bloco>summary small{font-weight:400;color:var(--ink3);margin-left:auto}
+.lb{display:block;font-size:12px;font-weight:600;color:var(--ink2);margin:6px 0 2px}.lb small{display:block;font-weight:400;color:var(--ink3);font-size:11px}.lb input,.lb select,.lb textarea{font-weight:400;margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:4px 6px;margin:4px 0}.chips label{display:inline-flex;align-items:center;gap:4px;background:#F4F7FA;border:1px solid var(--rule);border-radius:12px;padding:2px 8px;font-size:11.5px;cursor:pointer}.chips input{width:auto;margin:0}.chips label:has(input:checked){background:#E3F3F9;border-color:var(--blue);color:var(--blue)}
+button.lixo{padding:6px 8px}
+</style></head><body>
+<header><img src="icons/32.png" alt=""><b>Pesquisa MirandasTech</b><span id="ver"></span><button id="reler" title="Ler de novo a aba ativa (depois de navegar ou trocar de aba)" style="margin-left:8px;border:0;background:rgba(255,255,255,.15);color:#fff;border-radius:4px;padding:2px 7px;cursor:pointer;font-size:12px">↻ página</button><button id="abaCheia" title="Abrir em uma aba inteira" style="margin-left:8px;border:0;background:rgba(255,255,255,.15);color:#fff;border-radius:4px;padding:2px 7px;cursor:pointer;font-size:12px">↗ aba</button></header>
+<nav>
+  <button data-t="prj">Projeto</button><button data-t="dia">Busca</button><button data-t="ref">Referência</button><button data-t="aud">Auditoria</button>
+  <button data-t="tri">Triagem</button><button data-t="ext">Extração</button><button data-t="est">Estilo</button><button data-t="ia">Uso de IA</button><button data-t="man">Manuais</button><button data-t="sobre">Sobre</button>
+</nav>
+<main>
+
+<section id="ref">
+  <details class="ajuda"><summary>Referência: o artigo que está aberto vira uma referência conferida</summary><div><p><b>O que é.</b> Todo artigo tem um DOI, um código único (ex.: 10.1136/bmj.n71). A extensão lê o DOI da página e pergunta ao <b>Crossref</b>, o cartório dos DOIs, se ele existe e a quem pertence. Se existe, monta a referência no formato <b>ABNT</b> (NBR 6023) com os dados oficiais.</p><p><b>Por quê.</b> Ferramentas de IA inventam referências com aparência perfeita. A regra do manual é dura: <b>nenhuma referência entra no seu trabalho sem o DOI resolvido</b>. Conferir aqui leva três segundos; descobrir na banca custa a credibilidade.</p><p><b>Como usar.</b> Abra o artigo → clique no ícone → confira se título e autores batem com a página → <b>Copiar ABNT</b> ou <b>Salvar no Zotero</b> (com o Zotero aberto). Vermelho significa: não existe, não entra.</p></div></details>
+  <button class="b" id="lerartigo" style="width:100%;margin:0 0 4px;padding:8px">🔍 Ler o artigo aberto nesta aba</button>
+  <div class="row"><input id="doiman" placeholder="ou cole um DOI / link doi.org aqui" title="Cole 10.xxxx/… ou https://doi.org/10.xxxx/… e pressione Enter"><button class="b" id="doigo" style="flex:0 0 auto;margin:3px 0">Resolver</button></div>
+  <div class="muted" id="doi">procurando DOI na página…</div>
+  <div class="box" id="refbox"></div>
+  <button class="b" id="copiar">Copiar ABNT</button><button class="b o" id="abrir">Abrir no Crossref</button>
+  <div class="muted" id="periodico"></div>
+  <h2>Snowballing (OpenAlex, aberto)</h2>
+  <div class="muted" id="oainfo">resolva um DOI para ver citações</div>
+  <button class="b o" id="oacita">Quem cita este artigo</button><button class="b o" id="oaref">Referências deste artigo</button> <span class="muted">→ a lista vai para a aba Triagem</span>
+  <h2>Zotero</h2>
+  <div class="row"><select id="zalvo"><option value="">coleção selecionada no Zotero</option></select><input id="zetq" value="conferido-crossref" placeholder="etiquetas, separadas por vírgula"></div>
+  <button class="b" id="zotero">Salvar no Zotero</button> <span class="muted" id="zst"></span>
+</section>
+
+<section id="aud">
+  <details class="ajuda"><summary>Auditoria: confere uma lista inteira de referências de uma vez</summary><div><p><b>O que é.</b> Cole a bibliografia de um rascunho seu (ou de um texto que a IA gerou), uma referência por linha. Para cada uma, a extensão procura o DOI na linha e o confere no Crossref. Linha sem DOI recebe um <b>candidato</b> encontrado por busca bibliográfica, com uma pontuação, para você decidir se é a mesma obra.</p><p><b>Por quê.</b> É a rotina de verificação do manual aplicada em lote: <b>existe? os metadados conferem?</b> Verde é ponto de partida, não de chegada: ainda falta abrir o PDF e checar se o artigo diz o que você atribuiu a ele.</p><p><b>Como ler.</b> <span class='ok'>existe</span> = DOI resolve; compare título/periódico/ano com a sua linha. <span class='no'>NÃO EXISTE</span> = referência fabricada ou DOI errado: descarte ou corrija. <i>candidato</i> = sugestão, não confirmação.</p></div></details>
+  <p class="muted">Cole uma lista de referências (uma por linha) ou traga os incluídos da triagem. Cada DOI é resolvido no Crossref; linha sem DOI recebe um <em>candidato</em> por busca bibliográfica, que você confere. As verdes podem ir para o Zotero em lote.</p>
+  <textarea id="audtx" placeholder="MENESES, M.; ROCHA, R. The Effect of Fuel Quality… DOI: 10.12660/bre.v43n12023.90919"></textarea>
+  <button class="b o" id="audtri" title="Preenche a lista com os registros INCLUDE/MAYBE da triagem">Usar os incluídos da triagem</button><button class="b" id="audrun">Auditar</button><button class="b o" id="audcsv">Exportar CSV</button><button class="b o" id="audzot" title="Salva no Zotero só as linhas com DOI resolvido (verde), na coleção e com a etiqueta escolhidas na aba Referência">Salvar as verdes no Zotero</button> <span class="muted" id="audst"></span>
+  <div id="audout"></div>
+</section>
+
+<section id="dia">
+  <details class="ajuda"><summary>Diário de busca: o registro que torna a sua busca reprodutível</summary><div><p><b>O que é.</b> Uma revisão de literatura só é científica se outra pessoa conseguir refazer a busca e chegar ao mesmo número. Para isso registra-se, a cada busca: a <b>base</b> (Web of Science, Scopus…), a <b>string exata</b> (a expressão com AND/OR/aspas), os <b>filtros</b> (ano, idioma, tipo), a <b>data</b> e o <b>total que apareceu na tela</b>.</p><p><b>Por quê.</b> É o padrão <b>PRISMA-S</b>, exigido em revisões sistemáticas, e o que o diagrama PRISMA usa na primeira caixa («registros identificados»). Busca sem diário não entra no método.</p><p><b>Como usar.</b> Na página de resultados, clique no ícone: base, string e total vêm pré-preenchidos quando a base permite; <b>confira o total com a tela</b> (a extensão pode errar) e clique em Registrar. O botão exporta <code>buscas.csv</code>, o mesmo modelo do plugin.</p></div></details>
+  <details class="bloco" id="blOA" open><summary>Buscar no OpenAlex (base aberta, sem login)<small>string → resultados → diário e triagem</small></summary><div class="card">
+    <p class="muted">O OpenAlex indexa 250+ milhões de trabalhos e é aberto — a alternativa para quem não tem CAFe, e a base onde qualquer aluno reproduz a sua busca. A sintaxe é simples: palavras e aspas; <code>AND</code>/<code>OR</code>/<code>NOT</code> e parênteses também funcionam.</p>
+    <textarea id="oaq" style="min-height:44px" placeholder='ex.: "fuel adulteration" AND (detection OR inspection)'></textarea>
+    <div class="row"><input id="oade" placeholder="ano de" title="ano inicial (opcional)"><input id="oaate" placeholder="ano até" title="ano final (opcional)"><label style="flex:0 0 auto;font-size:12px"><input type="checkbox" id="oaart" style="width:auto;margin:0 3px 0 0">só artigos</label></div>
+    <button class="b" id="oabuscar">Buscar</button><button class="b o" id="oamais" hidden>Mais 50</button><button class="b o" id="oatri" hidden>Enviar para Triagem</button><button class="b o" id="oacsv" hidden>Exportar resultados.csv</button><button class="b g" id="oadiario" hidden>Registrar no diário</button>
+    <div class="muted" id="oast"></div>
+    <div id="oalist"></div>
+  </div></details>
+  <h2>Registrar uma busca feita em outra base</h2>
+  <p class="muted">Registre a busca <b>com o número que está na tela</b>. Exporta no formato <code>buscas.csv</code> do plugin (PRISMA-S).</p>
+  <input id="dbase" placeholder="base"><textarea id="dquery" title="A expressão exatamente como foi digitada na base, com AND, OR, aspas e asteriscos. É o que outra pessoa vai colar para refazer a busca." placeholder="string exata (verbatim)" style="min-height:48px"></textarea>
+  <div class="row"><input id="dcount" title="O número que a base mostra na tela. Confira: a extensão tenta ler, mas pode errar." placeholder="total retornado"><input id="dfiltros" title="Tudo o que restringiu o resultado: período, idioma, tipo de documento, área." placeholder="filtros (ano, tipo, idioma…)"></div>
+  <div class="row"><input id="darq" placeholder="arquivo exportado (RIS/BibTeX) — opcional" title="Nome do arquivo que você exportou da base. Escolha o arquivo ao lado e o SHA-256 é calculado."><input type="file" id="dfile" accept=".ris,.bib,.csv,.txt,.xml,.nbib"></div><div class="muted" id="dsha"></div>
+  <button class="b" id="dreg">Registrar busca</button><button class="b o" id="dcsv">Exportar buscas.csv</button><button class="b o lixo" data-chave="buscas" data-nome="o diário de busca">🗑</button> <span class="muted" id="dst"></span>
+  <div id="dlist"></div>
+</section>
+
+<section id="tri">
+  <details class="ajuda"><summary>Triagem: decidir, um a um, quais registros seguem para leitura completa</summary><div><p><b>O que é.</b> Depois da busca vêm centenas de títulos. A triagem é decidir, por título e resumo, quem passa: <b>INCLUDE</b> (vai para o texto completo), <b>EXCLUDE</b> com um <b>código</b> que diz o motivo (E1 fora do escopo, E2 só simulação…), ou <b>MAYBE</b> quando há dúvida razoável, que também vai para o texto completo.</p><p><b>Por quê.</b> Os critérios vêm do seu <b>codebook</b>, fixado antes de ver resultados (o «protocolo congelado»). Decidir depois de ver o resultado é acomodar o método ao dado. Por isso a extensão exige código na exclusão, pede uma nota e <b>não deixa trocar uma decisão sem limpá-la antes</b>, o que fica visível.</p><p><b>Como usar.</b> Abra a página de resultados (PubMed, SciELO, Google Scholar, ou qualquer página com links doi.org), escolha o código de exclusão no seletor, decida cada registro. <code>lote.tsv</code> tem o formato aceito pelo script <code>registrar_lote</code> do plugin. Os códigos são editáveis nas opções.</p></div></details>
+  <p class="muted">Registros lidos da página. Decida um a um: <b>INCLUDE</b>, <b>EXCLUDE</b> (o código é o motivo; obrigatório) ou <b>MAYBE</b>. A nota é opcional — vale a pena quando você reverte a sugestão de alguém ou o caso é limítrofe. O <b>✕</b> tira da lista o que não é estudo (notícia, menu, duplicata): não é decisão de triagem e não vai para o lote.</p>
+  <div class="row"><select id="tcod" title="código de exclusão padrão para os registros desta página; pode trocar em cada um"></select><input id="tlote" placeholder="nome do lote (ex.: lote 4)"></div>
+  <div class="muted"><span id="tinfo"></span> · <label><input type="checkbox" id="tocultos" style="width:auto;margin:0 3px 0 0">mostrar ocultos</label></div>
+  <div id="tlist"></div>
+  <button class="b g" id="tzot" title="Resolve cada DOI no Crossref e salva no Zotero, na coleção e etiqueta escolhidas na aba Referência, mais a etiqueta triagem-include ou triagem-maybe">Salvar INCLUDE/MAYBE no Zotero</button><button class="b o" id="ttsv">Exportar lote.tsv</button><button class="b o" id="tcsv">Exportar decisões.csv</button><button class="b o lixo" data-chave="decisoes,ocultos" data-nome="todas as decisões de triagem e os ocultos">🗑</button> <span class="muted" id="tst"></span>
+</section>
+
+<section id="ia">
+  <details class="ajuda"><summary>Uso de IA: uma linha por uso que mudou uma decisão ou um texto</summary><div>
+    <p><b>O que é.</b> O registro de uso de IA é uma tabela com dez colunas. Cada linha responde: <b>quando</b>, <b>em que etapa</b>, <b>qual ferramenta</b>, <b>para quê</b>, <b>o que saiu do seu computador</b>, <b>como você conferiu</b> a resposta e <b>o que decidiu</b>.</p>
+    <p><b>Por quê.</b> A Portaria CNPq 2.664/2026 e as revistas exigem <b>declarar</b> o uso de IA com ferramenta, fase e finalidade — e ninguém consegue declarar de memória seis meses depois. As duas colunas que mais importam: <i>o que saiu do computador</i> (é o que a LGPD e a licença da base perguntam) e <i>como conferiu</i> (é o que o parecerista pergunta).</p>
+    <p><b>O que entra e o que não entra.</b> Entra: agrupar registros, sugerir string, extrair dados, rascunhar método, traduzir, revisar texto. <b>Não entra:</b> corrigir uma vírgula, perguntar o que significa uma sigla. Na dúvida, registre: uma linha a mais custa segundos; uma a menos custa uma retratação.</p>
+  </div></details>
+  <div id="iahdr" class="muted"></div>
+
+  <div class="card"><h2 style="margin-top:0">1 · O que você fez</h2>
+    <label class="lb">Data <input id="idata" type="date"></label>
+    <label class="lb">Etapa da pesquisa <small>em que fase o uso aconteceu</small>
+      <select id="ietapa"><option value="pergunta">pergunta — formular ou tensionar a pergunta</option><option value="busca">busca — termos, strings, bases</option><option value="triagem">triagem — sugerir inclusão/exclusão</option><option value="leitura">leitura — resumir, localizar trechos</option><option value="extração">extração — preencher matriz</option><option value="análise">análise — código, estatística, categorias</option><option value="escrita">escrita — rascunhar, traduzir, revisar</option><option value="revisão">revisão — simular parecerista</option></select></label>
+    <div class="row"><label class="lb">Ferramenta <input id="iferr" placeholder="ChatGPT, Claude, Elicit, Consensus…"></label><label class="lb">Modelo / versão <small>se souber</small><input id="imod" placeholder="GPT-5, claude-opus-5, —"></label></div>
+    <label class="lb">Finalidade <small>o que você pediu, em uma frase</small><input id="ifin" placeholder="ex.: sugerir sinônimos para a string de busca"></label>
+    <label class="lb">Pedido ou consulta <small>resumo do prompt; não precisa ser literal</small><textarea id="iprompt" style="min-height:44px" placeholder="ex.: «liste sinônimos de fuel adulteration usados em artigos de engenharia»"></textarea></label>
+  </div>
+
+  <div class="card"><h2 style="margin-top:0">2 · O que saiu do seu computador</h2>
+    <p class="muted">Marque tudo o que foi enviado à ferramenta. É a coluna «dados enviados».</p>
+    <div class="chips" id="idadoschips">
+      <label><input type="checkbox" value="nenhum dado pessoal"> nenhum dado pessoal</label>
+      <label><input type="checkbox" value="só texto meu"> só texto meu</label>
+      <label><input type="checkbox" value="títulos e resumos de base licenciada (WoS/Scopus)"> títulos/resumos de base licenciada</label>
+      <label><input type="checkbox" value="PDF de editora"> PDF de editora</label>
+      <label><input type="checkbox" value="dados da pesquisa (não publicados)"> dados da pesquisa</label>
+      <label><input type="checkbox" value="manuscrito de terceiros"> manuscrito de terceiros</label>
+    </div>
+    <input id="idados" placeholder="ou descreva: o que exatamente foi enviado">
+    <div class="warn" id="iaviso" hidden>⚠ Resumo licenciado, PDF pago, dado de pesquisa ou manuscrito alheio exigem base legal/licença e não podem ficar em repositório público. Confira o manual de Uso de IA, slide «O que não entra no prompt».</div>
+  </div>
+
+  <div class="card"><h2 style="margin-top:0">3 · O que você fez com a resposta</h2>
+    <p class="muted">Como conferiu — é a coluna «validação», a que o parecerista pergunta.</p>
+    <div class="chips" id="ivalchips">
+      <label><input type="checkbox" value="DOI conferido no Crossref"> DOI no Crossref</label>
+      <label><input type="checkbox" value="número conferido na tela da base"> número na tela da base</label>
+      <label><input type="checkbox" value="trecho conferido no PDF"> trecho no PDF</label>
+      <label><input type="checkbox" value="comparado linha a linha com a minha versão"> comparado linha a linha</label>
+      <label><input type="checkbox" value="script executado e resultado reproduzido"> script executado</label>
+      <label><input type="checkbox" value="decisão registro a registro"> decisão registro a registro</label>
+    </div>
+    <input id="ival" placeholder="ou descreva como conferiu">
+    <label class="lb">Decisão humana <small>o que você decidiu a partir disso — a decisão é sempre sua</small><input id="idec" placeholder="ex.: aceitei 4 dos 9 termos; descartei os demais"></label>
+    <div class="row"><label class="lb">Entra na declaração do trabalho? <small>sim = altera conteúdo (DECLARE); não = uso instrumental (LIVRE)</small><select id="idecl"><option value="sim">sim — entra na declaração</option><option value="não">não — uso instrumental</option></select></label><label class="lb">Quem <small>quem usou, em equipe</small><input id="iquem" placeholder="iniciais"></label></div>
+  </div>
+  <button class="b" id="ireg">Registrar este uso</button><button class="b o" id="icsv">Exportar USO_DE_IA.csv</button><button class="b o lixo" data-chave="usos" data-nome="o registro de uso de IA">🗑</button><button class="b o" id="iex">Ver exemplo preenchido</button> <span class="muted" id="ist"></span>
+  <div id="ilist"></div>
+</section>
+
+<section id="ext">
+  <details class="ajuda"><summary>Extração: tirar de cada artigo os dados que a sua pergunta precisa — com prova</summary><div>
+    <p><b>O que é.</b> Depois de decidir quais artigos entram (triagem), você lê cada um e preenche uma <b>matriz</b>: uma tabela em que cada <b>linha é um artigo</b> e cada <b>coluna é uma pergunta sua</b> — qual foi a amostra? que instrumento usou? qual o achado principal? qual limitação o autor declarou? As colunas vêm do seu protocolo.</p>
+    <p><b>O que é uma «célula».</b> Um cruzamento artigo × pergunta. Exemplo: artigo <i>Meneses &amp; Rocha (2025)</i> × coluna <i>amostra</i> → «postos fiscalizados pela ANP entre 2010 e 2019». Só que a célula aqui guarda <b>três coisas</b>, não uma: o <b>valor</b> (o resumo seu), o <b>trecho literal</b> do artigo que sustenta o valor, e a <b>página ou seção</b> de onde saiu. É a «âncora».</p>
+    <p><b>Por quê.</b> Sem a âncora, daqui a seis meses (ou na banca) ninguém consegue conferir se a célula está certa — nem você. E quando a IA ajuda a extrair, a âncora é o que separa «leu» de «inventou»: você abre a página e o trecho está lá, ou não está.</p>
+    <p><b>Como usar, em três passos.</b> (1) Com o artigo aberto, <b>selecione o trecho</b> que responde à pergunta e clique com o botão direito → <i>Extrair seleção para a matriz</i> — ou copie e cole no campo «trecho literal». (2) Escolha a <b>coluna</b> e anote a <b>página</b>. (3) Resuma em <b>valor</b> se quiser, e grave. No fim, «Exportar» gera a matriz para a síntese.</p>
+    <p><b>Limite conhecido.</b> No visualizador de PDF do Chrome o botão direito da extensão não funciona: copie o trecho e cole aqui.</p>
+  </div></details>
+  <div class="card">
+    <label class="lb">Artigo (linha da matriz) <small>vem do DOI da página aberta; ou escreva autor-ano</small><input id="eid" placeholder="ex.: 10.12660/bre.v43n12023.90919 ou Meneses & Rocha (2025)"></label>
+    <label class="lb">Coluna da matriz <small>a pergunta que esta célula responde</small>
+      <select id="ecampo"><option value="pergunta_do_estudo">pergunta do estudo</option><option value="contexto">contexto (país, setor, período)</option><option value="desenho">desenho / método</option><option value="amostra">amostra (n, unidade)</option><option value="instrumento">instrumento / fonte de dados</option><option value="achado_principal">achado principal</option><option value="limite_declarado">limitação declarada pelo autor</option><option value="relacao_com_minha_pergunta">relação com a minha pergunta</option><option value="outro">outra coluna…</option></select></label>
+    <input id="ecampo2" placeholder="nome da outra coluna" hidden>
+    <label class="lb">Trecho literal do artigo <small>selecione na página e clique em «usar a seleção», ou cole; palavras exatas, sem parafrasear</small><button class="b o s" id="esel" style="margin:0 0 3px">⤓ usar a seleção da página</button><textarea id="etrecho" style="min-height:52px" placeholder="ex.: «the sample comprises 1,214 inspections carried out by ANP between 2010 and 2019»"></textarea></label>
+    <div class="row"><label class="lb">Página ou seção <small>em página HTML vem a seção automaticamente; em PDF, digite a página</small><input id="epag" placeholder="ex.: p. 4, Seção 3.1"></label><label class="lb">Valor resumido <small>opcional: o que vai na célula</small><input id="evalor" placeholder="ex.: n = 1.214 inspeções, 2010–2019"></label></div>
+    <button class="b" id="ereg">Gravar célula</button><button class="b o" id="ecsv">Exportar extracao.csv</button> <span class="muted" id="est_"></span>
+  </div>
+  <h2>Notas soltas <small class="muted" style="text-transform:none;letter-spacing:0">— selecione na página e use o botão direito → <i>Extrair seleção para a matriz</i>, ou <button class="b o s" id="enota">+ nota com a seleção atual</button></small></h2>
+  <p class="muted">Vá marcando trechos enquanto lê; depois dê a coluna e a página a cada nota e grave — uma a uma ou todas de uma vez.</p>
+  <div id="enotas"></div>
+  <button class="b" id="egravartodas" hidden>Gravar todas as notas com página</button><button class="b o lixo" data-chave="notas" data-nome="as notas soltas">🗑 notas</button><button class="b o lixo" data-chave="matriz" data-nome="a matriz de extração (todas as células)">🗑 matriz</button>
+  <div id="elist"></div>
+</section>
+
+<section id="est">
+  <details class="ajuda"><summary>Estilo: contar as marcas que denunciam texto gerado</summary><div><p><b>O que é.</b> Texto de IA tem tiques reconhecíveis: «não é X, é Y», listas de três («constrange, registra e responsabiliza»), «vale destacar», travessões em cascata, fechos grandiloquentes. Esta aba conta as ocorrências no seu texto, por regra, sem enviar nada a lugar nenhum.</p><p><b>Por quê.</b> Revisores já reconhecem essas marcas. A contagem não prova que o texto é de IA, e não é para isso: é um roteiro de revisão para o texto ficar com a sua voz. Zero em tudo não é a meta; uma antítese por artigo é ênfase, dez é tique.</p><p><b>Como usar.</b> Cole um trecho seu, clique em Contar marcas, leia os exemplos apontados e decida o que cortar. Depois leia em voz alta: o ouvido pega o ritmo artificial que o olho já não vê.</p></div></details>
+  <p class="muted">Cole um trecho seu. As regras contam marcas típicas de texto gerado — são <b>sinais, não prova</b>. Nada sai do computador.</p>
+  <textarea id="estx" style="min-height:110px"></textarea>
+  <button class="b" id="esrun">Contar marcas</button>
+  <div id="esout"></div>
+</section>
+
+<section id="prj">
+  <details class="ajuda"><summary>Projeto: o plugin, a pasta do projeto e como esta extensão conversa com eles</summary><div>
+    <p><b>O que é um «projeto» aqui.</b> É uma pasta no seu computador com a estrutura dos manuais (protocolo, buscas, triagem, extração, texto…) e um arquivo <code>PROGRESSO.md</code> que lista as <b>11 fases</b> da pesquisa e os checklists de Método, Uso de IA, Biblioteca e Leitura. Um item só é marcado quando existe evidência (arquivo, número, script).</p>
+    <p><b>Quem cria e mantém a pasta</b> é o <b>plugin Pesquisa MirandasTech</b> (no Claude Code, no ChatGPT ou no Codex): o agente <i>Pesquisador</i> conduz fase a fase e chama o Metodólogo, o Orientador e o Bibliotecário na hora certa. Esta extensão é o braço do plugin <b>dentro do navegador</b>: registra buscas, decisões, usos de IA e extrações enquanto você navega, e depois leva tudo para a pasta.</p>
+    <p><b>Três situações.</b> (1) <b>Já tem projeto</b>: abra o <code>PROGRESSO.md</code> abaixo para ver a fase atual, e use «Gravar na pasta» para levar os registros. (2) <b>Ainda não tem</b>: crie com o plugin (recomendado) ou crie a pasta inicial aqui mesmo. (3) <b>Fez registros no Claude Code</b>: importe os CSV/TSV para a extensão continuar de onde parou.</p>
+  </div></details>
+
+  <details class="bloco" id="bl1"><summary>1 · O plugin Pesquisa MirandasTech — onde está e o que faz<small>instalar e usar</small></summary>
+  <div class="card">
+    <p><b>O que faz.</b> Quatro papéis num plugin só: o <b>Pesquisador</b> (gerente: 11 fases, um <code>PROGRESSO.md</code>, só fecha fase com evidência), o <b>Metodólogo</b> (pergunta, desenho, amostra, projeto NBR 15287, banca simulada), o <b>Orientador de IA</b> (o que pode delegar em cada etapa, registro e declaração) e o <b>Bibliotecário</b> (Zotero, auditoria da biblioteca, ABNT). 20 skills, 7 comandos <code>/pesquisa</code>, scripts e modelos de arquivo. O aluno decide sempre; nada é inventado; dado pessoal e material licenciado ficam fora do repositório.</p>
+    <table>
+      <tr><th>Onde</th><th>Como usar</th></tr>
+      <tr><td><b>Claude Code</b></td><td><code class="cp">/plugin marketplace add joaopaulomirandamatias/pesquisa-mirandastech</code><br><code class="cp">/plugin install pesquisa@mirandastech</code><br>depois: <code class="cp">/pesquisa:iniciar</code> ou «Pesquisador, onde paramos?»</td></tr>
+      <tr><td><b>ChatGPT</b></td><td><a href="https://chatgpt.com/plugins/plugins_6aa0a0320a248191b33a514a3a52325b" target="_blank">Página do plugin no ChatGPT</a> (botão «Testar no chat» e prompts prontos) · ou, em qualquer chat, digite <b>@</b> → <b>Pesquisa MirandasTech</b> → <code class="cp">/pesquisador Estou começando uma pesquisa sobre … Por onde começo?</code></td></tr>
+      <tr><td><b>Codex CLI</b></td><td><code class="cp">codex plugin marketplace add joaopaulomirandamatias/pesquisa-mirandastech</code></td></tr>
+      <tr><td><b>Repositório</b></td><td><a href="https://github.com/joaopaulomirandamatias/pesquisa-mirandastech" target="_blank">github.com/joaopaulomirandamatias/pesquisa-mirandastech</a> (CC BY 4.0)</td></tr>
+      <tr><td><b>Manual</b></td><td><a href="https://plugin.mirandastech.com.br/" target="_blank">plugin.mirandastech.com.br</a> — passo a passo com capturas</td></tr>
+    </table>
+    <p class="muted">Clique em qualquer comando para copiar.</p>
+  </div>
+
+  </details>
+<details class="bloco" id="bl2"><summary>2 · Já tem projeto? Abra o PROGRESSO.md (só leitura)<small>ver a fase atual</small></summary>
+  <div class="card">
+    <p class="muted">É o arquivo na raiz da pasta do projeto. A extensão lê as tabelas de fases e checklists e mostra onde você está; <b>não altera o arquivo</b> — quem marca itens é o plugin, com evidência.</p>
+    <input type="file" id="parq" accept=".md,.txt">
+    <div id="pout"></div>
+  </div>
+
+  </details>
+<details class="bloco" id="bl3"><summary>3 · Ainda não tem? Crie o projeto<small>pelo plugin ou aqui</small></summary>
+  <div class="card">
+    <p><b>Caminho recomendado</b> — pelo plugin, que entrevista você (tema, prazo, programa, orientador) e cria a pasta com tudo.</p>
+    <div class="links3">
+      <a class="b" href="https://chatgpt.com/plugins/plugins_6aa0a0320a248191b33a514a3a52325b" target="_blank">Abrir no ChatGPT ↗</a>
+      <a class="b o" href="https://claude.ai/new?q=Quero%20iniciar%20um%20projeto%20de%20pesquisa%20cient%C3%ADfica%20seguindo%20os%20manuais%20MirandasTech%20%28https%3A//lab.mirandastech.com.br/%29.%20Conduza-me%20como%20o%20agente%20Pesquisador%3A%20fase%200%20%28diagn%C3%B3stico%3A%20tema%2C%20prazo%2C%20programa%2C%20orientador%29%2C%20depois%20pergunta%20com%20tabela%20vazia%20do%20resultado.%20N%C3%A3o%20invente%20refer%C3%AAncias%3B%20toda%20refer%C3%AAncia%20precisa%20de%20DOI%20resolvido%20no%20Crossref.%20Pergunte%20uma%20coisa%20por%20vez%3B%20eu%20decido." target="_blank">Abrir no Claude.ai ↗</a>
+      <code class="cp" title="copie e cole no terminal do Claude Code, dentro da pasta do projeto">/pesquisa:iniciar</code>
+    </div>
+    <p class="muted"><b>ChatGPT:</b> abre a página do plugin; clique em «Testar no chat» e escreva <code class="cp">/pesquisador começar minha pesquisa sobre …</code>. <b>Claude.ai:</b> abre uma conversa já com o pedido de iniciar o projeto pelos manuais (sem o plugin, que no Claude só existe no Claude Code — o envio ao diretório oficial está em revisão desde 08/09/2026; quando aprovado, o link de instalação entra aqui). <b>Claude Code:</b> instale o plugin (bloco 1) e rode <code class="cp">/pesquisa:iniciar</code> na pasta.</p>
+    <p><b>Ou crie a pasta inicial aqui</b> (modo <b>↗ aba</b>): a extensão cria a mesma estrutura do plugin — pastas por fase, <code>PROGRESSO.md</code> com as 11 fases, <code>protocolo.md</code>, <code>CODEBOOK.md</code>, <code>buscas.csv</code>, <code>USO_DE_IA.csv</code> e <code>.gitignore</code>. Depois, o plugin reconhece a pasta e continua.</p>
+    <div class="row"><input id="ctema" placeholder="tema da pesquisa"><input id="cmetodo" placeholder="método provável (ex.: revisão sistemática)"></div>
+    <div class="row"><input id="cprog" placeholder="programa / disciplina"><input id="cprazo" placeholder="prazo (AAAA-MM)"></div>
+    <button class="b" id="ccriar">Criar pasta do projeto…</button> <span class="muted" id="cst"></span>
+  </div>
+
+  </details>
+<details class="bloco" id="bl4"><summary>4 · Levar os registros desta extensão para o projeto<small>gravar na pasta</small></summary>
+  <div class="card">
+    <p class="muted">A extensão guarda o que você registra nas outras abas. Aqui você escolhe a pasta do projeto uma vez e grava os arquivos nela — nos mesmos nomes e colunas que o plugin usa:</p>
+    <table><tr><th>Arquivo</th><th>O que é</th><th>Vai para</th></tr>
+      <tr><td><code>buscas.csv</code></td><td>diário de busca (PRISMA-S)</td><td><code>01_buscas/</code></td></tr>
+      <tr><td><code>USO_DE_IA.csv</code></td><td>registro de uso de IA, dez colunas + quem</td><td><code>00_projeto/</code></td></tr>
+      <tr><td><code>lote.tsv</code></td><td>decisões de triagem (aceito por <code>registrar_lote</code>)</td><td><code>02_triagem/</code></td></tr>
+      <tr><td><code>extracao.csv</code></td><td>células extraídas com página e trecho literal</td><td><code>03_extracao/</code></td></tr>
+    </table>
+    <button class="b o" id="pasta" title="Abre o seletor de pastas do sistema (em aba inteira, porque o popup fecha ao abrir o seletor)">Escolher pasta do projeto…</button><button class="b" id="pastagravar">Gravar na pasta</button> <span class="muted" id="pastast"></span>
+    <p class="muted" style="margin-top:6px">Sem escolher pasta, use os botões «Exportar» de cada aba: baixam o mesmo arquivo para a pasta Downloads.</p>
+  </div>
+
+  </details>
+<details class="bloco" id="bl5"><summary>5 · Trazer de volta o que foi feito fora da extensão<small>importar CSV/TSV</small></summary>
+  <div class="card">
+    <p class="muted">Registrou buscas ou triou lotes no Claude Code? Importe os arquivos (<code>buscas.csv</code>, <code>USO_DE_IA.csv</code>, <code>lote.tsv</code>, <code>decisoes_triagem.csv</code>, <code>extracao.csv</code>) e a extensão passa a considerá-los — nas duplicatas da triagem, no contador PRISMA e nos próximos exports. Nada é sobrescrito: decisão já existente é mantida.</p>
+    <input type="file" id="pimp" accept=".csv,.tsv,.txt" multiple><div class="muted" id="pimpst"></div>
+  </div>
+
+  </details>
+<details class="bloco" id="bl6"><summary>6 · Contador PRISMA (a partir do que está guardado)<small>contagens</small></summary>
+  <div class="card"><div id="prisma" class="muted"></div><button class="b o" id="prismacsv">Exportar prisma_flow.csv</button></div>
+
+  </details>
+<details class="bloco" id="bl7"><summary>7 · Dados desta extensão<small>backup e opções</small></summary>
+  <div class="card">
+    <div class="muted" id="pstat"></div>
+    <p class="muted">Tudo o que você registra fica salvo na hora, neste navegador (é o objetivo: nada se perde ao fechar). Cada aba tem um 🗑 para apagar só a sua parte; aqui dá para apagar tudo. <b>Exporte antes</b> — apagar não tem volta.</p>
+    <button class="b o" id="pbackup">Exportar tudo (JSON)</button><button class="b r" id="plimpar">Apagar tudo</button>
+    <p class="muted">Códigos de exclusão, etiqueta do Zotero e «quem»: <a href="#" id="popts">opções</a>.</p>
+  </div>
+</details>
+</section>
+
+<section id="man">
+  <details class="ajuda"><summary>Manuais: os dezesseis guias abertos, na ordem da pesquisa</summary><div><p><b>O que é.</b> Cada manual é um deck de slides com passo a passo, capturas reais e regras, publicado em aberto (CC BY 4.0). A lista segue a ordem das fases de uma pesquisa; o <b>laboratório 3D</b> reúne todos num só lugar.</p><p><b>Como usar.</b> Clique no manual da fase em que você está. Os itens marcados com ▶ são os que esta extensão apoia diretamente.</p></div></details>
+  <div class="mlist">
+    <a href="https://lab.mirandastech.com.br/" target="_blank" class="mtop"><b>🧪 Laboratório 3D</b><span>todos os manuais, o plugin e os repositórios</span></a>
+    <h2>Fundamentos</h2>
+    <a href="https://metodologia.mirandastech.com.br/" target="_blank"><b>Metodologia da pesquisa</b><span>pergunta, método, desenho, projeto NBR 15287, banca</span></a>
+    <a href="https://manual.mirandastech.com.br/" target="_blank"><b>▶ Uso de IA na pesquisa</b><span>matriz de permissões, registro, declaração, referências</span></a>
+    <a href="https://plugin.mirandastech.com.br/" target="_blank"><b>▶ Plugin Pesquisa MirandasTech</b><span>Pesquisador, Metodólogo, Orientador e Bibliotecário no Claude e no ChatGPT</span></a>
+    <h2>Busca e biblioteca</h2>
+    <a href="https://busca.mirandastech.com.br/" target="_blank"><b>▶ Busca em bases científicas</b><span>strings, sintaxe por base, diário PRISMA-S, OpenAlex</span></a>
+    <a href="https://zotero.mirandastech.com.br/" target="_blank"><b>▶ Zotero</b><span>biblioteca, coleções, Better BibTeX, estilo ABNT</span></a>
+    <a href="https://prisma.mirandastech.com.br/" target="_blank"><b>▶ Revisão sistemática · PRISMA 2020</b><span>protocolo, triagem, κ, diagrama de fluxo</span></a>
+    <a href="https://bibliometria.mirandastech.com.br/" target="_blank"><b>Bibliometria</b><span>VOSviewer e Bibliometrix</span></a>
+    <h2>Leitura e dados</h2>
+    <a href="https://notebook.mirandastech.com.br/" target="_blank"><b>▶ Gemini Notebook</b><span>fichamento e matriz de síntese conferida célula a célula</span></a>
+    <a href="https://dados.mirandastech.com.br/" target="_blank"><b>Análise de dados</b><span>limpeza, análise, codificação qualitativa</span></a>
+    <a href="https://cienciaaberta.mirandastech.com.br/" target="_blank"><b>Ciência aberta</b><span>pré-registro, OSF, Zenodo, plano de gestão de dados</span></a>
+    <h2>Escrita e entrega</h2>
+    <a href="https://latex.mirandastech.com.br/" target="_blank"><b>LaTeX · Overleaf · abnTeX2</b><span>trabalho em ABNT sem sofrer com formatação</span></a>
+    <a href="https://git.mirandastech.com.br/" target="_blank"><b>Git e GitHub</b><span>versão, repositório do projeto, citação CFF</span></a>
+    <a href="https://defesa.mirandastech.com.br/" target="_blank"><b>Defesa e qualificação</b><span>apresentação, ensaio, checklist de banca</span></a>
+    <a href="https://submissao.mirandastech.com.br/" target="_blank"><b>Submissão · ORCID · Lattes</b><span>periódico, carta, resposta a revisores, perfis</span></a>
+    <h2>Para quem orienta e ensina</h2>
+    <a href="https://orientador.mirandastech.com.br/" target="_blank"><b>Manual do orientador</b><span>acordo de orientação, reuniões, autoria CRediT</span></a>
+    <a href="https://professor.mirandastech.com.br/" target="_blank"><b>Manual do professor</b><span>plano de ensino, rubrica, progresso da turma</span></a>
+    <h2>Mais</h2>
+    <a href="https://blog.mirandastech.com.br/" target="_blank"><b>Blog MirandasTech</b><span>artigos sobre IA, pesquisa e método</span></a>
+  </div>
+</section>
+</main>
+
+<section id="sobre">
+  <div class="sobre-top"><img src="icons/logo_320.png" alt="MirandasTech Pesquisa"><div>
+    <h3>MirandasTech</h3><p class="lead">Pesquisa · Tecnologia · Impacto</p>
+    <p>Conhecimento a serviço de uma sociedade melhor: método científico explicado com passo a passo real, ferramentas abertas e uma regra que atravessa tudo — <b>a IA encontra, não prova; formula, não decide; registra, você assina.</b></p>
+  </div></div>
+  <h2>Quem faz</h2>
+  <div class="card"><p><b>João Paulo Miranda Matias</b> — policial militar, mestrando em Engenharia Elétrica na Escola Politécnica da USP e pesquisador em IA e sistemas multiagentes. Os manuais nasceram da própria pesquisa: cada regra vem de um caso em que faltou.</p>
+  <p><a href="https://www.linkedin.com/in/joaopaulomirandamatias/" target="_blank">LinkedIn</a> · <a href="https://github.com/joaopaulomirandamatias" target="_blank">GitHub</a> · <a href="mailto:contato@mirandastech.com.br">contato@mirandastech.com.br</a></p></div>
+  <h2>O que existe</h2>
+  <div class="card"><table>
+    <tr><td><b>16 manuais</b></td><td>decks com capturas reais e fatos verificados, da pergunta à submissão — <a href="https://lab.mirandastech.com.br/" target="_blank">laboratório 3D</a></td></tr>
+    <tr><td><b>Plugin</b></td><td>Pesquisador, Metodólogo, Orientador e Bibliotecário no Claude Code, no ChatGPT e no Codex — <a href="https://plugin.mirandastech.com.br/" target="_blank">manual</a></td></tr>
+    <tr><td><b>Esta extensão</b></td><td>o braço do plugin no navegador: referências, diário, triagem, registro de IA, extração</td></tr>
+    <tr><td><b>Blog</b></td><td>artigos sobre IA, pesquisa e método — <a href="https://blog.mirandastech.com.br/" target="_blank">blog.mirandastech.com.br</a></td></tr>
+    <tr><td><b>Site</b></td><td><a href="https://www.mirandastech.com.br/" target="_blank">www.mirandastech.com.br</a></td></tr>
+  </table></div>
+  <h2>Licença e como citar</h2>
+  <div class="card"><p>Manuais, plugin e extensão são abertos — <b>CC BY 4.0</b> (conteúdo) — e podem ser usados, adaptados e redistribuídos com crédito.</p>
+  <div class="box" id="citar">MATIAS, J. P. M. Manuais MirandasTech de pesquisa científica. MirandasTech, 2026. Disponível em: https://lab.mirandastech.com.br/. Acesso em: DATA.</div>
+  <button class="b o" id="copiarcit">Copiar citação</button></div>
+  <p class="muted">Pesquisa MirandasTech · extensão para Chrome <span id="ver2"></span> · nada sai do seu computador · <a href="#" id="verpriv">política de privacidade</a></p>
+</section>
+<footer><a href="https://lab.mirandastech.com.br/" target="_blank">Manuais</a> · <a href="https://blog.mirandastech.com.br/" target="_blank">Blog MirandasTech</a> · <a href="https://plugin.mirandastech.com.br/" target="_blank">Plugin</a> · <span>tudo local, nada sai do seu computador</span></footer>
+<script type="module" src="popup.js"></script></body></html>
